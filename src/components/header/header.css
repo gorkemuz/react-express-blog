@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+.flex-container {
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 22px;
+    font-family: 'Arvo', serif;
+    border-bottom: 2px solid black;
+    color: black;
+  }
