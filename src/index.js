@@ -1,18 +1,23 @@
+// LIBRARY IMPORTS
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import App from './pages/app';
-import Post from './pages/add-post';
-import Header from './components/header/header';
 import { BrowserRouter, Route } from 'react-router-dom';
+
+// PAGE AND COMPONENT IMPORTS
+import App from './pages/app';
+import Post from './pages/post/post';
+import AddPost from './pages/add-post';
+import Header from './components/header/header';
 
 export default class Index extends Component {
     render() {
       return (
         <BrowserRouter>
             <div className="container">
-                <Header />                
+                <Header />
+                <Route exact path="/post/add" component={AddPost}/>
+                <Route exact path='/:id' component={Post}/>                
                 <Route exact path="/" component={App}/>
-                <Route path="/add-post" component={Post}/>
             </div>
         </BrowserRouter>
       );

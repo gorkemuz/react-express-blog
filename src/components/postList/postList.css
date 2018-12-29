@@ -1,5 +1,6 @@
 .postList{
     margin-top: 5%;
+    border-bottom: 1px solid black;
 }
 .p{
     margin-top: 1%; 
@@ -8,4 +9,13 @@
 }
 .title{
     font-size: 25px;
+}
+.delete{
+    font-size: 17px;
+    color:red;
+    margin-left: 2%;
+    cursor: pointer;
+}
+.today{
+    font-size: 17px;
 }

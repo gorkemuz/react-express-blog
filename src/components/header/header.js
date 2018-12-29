@@ -6,7 +6,7 @@ const Header = () => {
       return (
         <div className="flex-container">
             <Link to='/'><div>HOME</div></Link>
-            <Link to='/add-post'><div>ADD POST</div></Link>
+            <Link to='/post/add'><div>ADD POST</div></Link>
         </div> 
       );
     }
