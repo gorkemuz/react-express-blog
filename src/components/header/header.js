@@ -11,7 +11,7 @@ const Header = () => {
                     <Link className="nav-link" to="/">HOME<span className="sr-only">(current)</span></Link>
                     </li>
                 </ul>
-                <Link className='add-post' to='/post/add'><div>ADD POST</div></Link>            
+                <Link className='add-post' to='/add'><div>ADD POST</div></Link>            
             </div>
         </nav>
       );

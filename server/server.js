@@ -1,26 +1,48 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import mongoose from 'mongoose';
-import Blog from './models/blog';
+import Blog from './database/models/blog';
+import User from './database/models/user';
+import dbConnection from './database';
+import passport from './passport';
+import morgan from 'morgan';
+import session from 'express-session';
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
+app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(cors());
 
+
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+
         /* MONGO CONNECTION */
 
-mongoose
-  .connect('mongodb://rheawin:asdas111@ds145184.mlab.com:45184/blog')
-  .then(() => {
-    console.log('MongoDB Connected');
-  })
-  .catch(err => {
-    console.log(err);
-    console.log('MongoDB Not Connected');
-});
+app.get('/user', (req, res, next) => {
+    console.log('===== userss!s!======')
+    console.log(req.user)
+    if (req.user) {
+        res.json({ user: req.user })
+    } else {
+        res.json({ user: null })
+    }
+})
+
         /* POST REQUESTS */ 
 app.post('/add-post',(req,res) => {
     const blog = new Blog();
@@ -57,6 +79,41 @@ app.post('/delete', (req,res) => {
             success:true,
         })
     })
-
 })
+app.post('/register', (req, res) => {
+    console.log(req.body);
+    const username = req.body.username;
+    const password = req.body.password;
+    // ADD VALIDATION
+    User.findOne({ username: username }, (err) => {
+        if (err) {
+            console.log('User.js post error: ', err)
+        }
+        else {
+            const newUser = new User({
+                username: username,
+                password: password
+            })
+            newUser.save((err, savedUser) => {
+                if (err) return res.json(err)
+                res.json(savedUser)
+            })
+        }
+    })
+})
+app.post(
+    '/login',
+    function (req, res, next) {
+        console.log('routses/user.js, login, req.body: ');
+        next()
+    },
+    passport.authenticate('local'),
+    (req, res) => {
+        console.log('logged in', req.user);
+        var userInfo = {
+            username: req.user.username
+        };
+        res.send(userInfo);
+    }
+)
 app.listen(8000,() => console.log('server başladı'))

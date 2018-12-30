@@ -32,7 +32,7 @@ class PostList extends React.Component{
             <div>
                 { this.state.posts.map((post,i) =>
                 <div className='postList' key={i}>
-                    <h5 className='title'><Link to={post._id}>{post.title}</Link></h5>
+                    <h5 className='title'><Link to={'/post/'+post._id}>{post.title}</Link></h5>
                     <div className='row'>
                         <div className='col-md-10'>
                             <p className='p'>{
@@ -42,7 +42,7 @@ class PostList extends React.Component{
                             }
                             {
                                 (post.text.length >= 200) 
-                                ? <Link to={'/'+post._id}>more</Link>
+                                ? <Link to={'/post/'+post._id}>more</Link>
                                 : null
                             }
                             </p>
