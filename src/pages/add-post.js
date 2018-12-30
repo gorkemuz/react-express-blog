@@ -44,13 +44,13 @@ class AddPost extends Component {
       return (
         <div>
             <form onSubmit={this.formSubmit}>
-                Title<br/>
+                title<br/>
                 <input type="text" name="title" onChange={this.handleTitle}/>
                 <br/>
-                Content<br/>
+                text<br/>
                 <input type="text" name="text" onChange={this.handleText}/>
                 <br/><br/>
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="SAVE"/>
             </form> 
         </div>
       );

@@ -9,10 +9,11 @@
 }
 .title{
     font-size: 25px;
+    color: #3772ff;
 }
 .delete{
     font-size: 17px;
-    color:red;
+    color:#2708a0;
     margin-left: 2%;
     cursor: pointer;
 }

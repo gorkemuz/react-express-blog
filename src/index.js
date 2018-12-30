@@ -13,11 +13,13 @@ export default class Index extends Component {
     render() {
       return (
         <BrowserRouter>
-            <div className="container">
+            <div>
                 <Header />
-                <Route exact path="/post/add" component={AddPost}/>
-                <Route exact path='/:id' component={Post}/>                
-                <Route exact path="/" component={App}/>
+                <div className='container'>
+                  <Route exact path="/post/add" component={AddPost}/>
+                  <Route exact path='/:id' component={Post}/>                
+                  <Route exact path="/" component={App}/>
+                </div>
             </div>
         </BrowserRouter>
       );
